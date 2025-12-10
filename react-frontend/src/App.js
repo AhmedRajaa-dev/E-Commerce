@@ -1,13 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
 import logo from './logo.svg';
-import Login from './Pages/Login';
+
+import Register from './Pages/Auth/Register';
+
 
 
 function App() {
+
   return (
     <div className="App">
       <Routes>
-        <Route path='/login' element={<Login/>}></Route>
+        <Route path='/register' element={<Register/>}></Route>
       </Routes>
     </div>
   );
