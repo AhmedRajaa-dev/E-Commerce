@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import Cookie from "cookie-universal";
 import axios from "axios";
 import { bascURL, USERS } from "../../Api/Api";
+import Logout from "../Auth/LogOut";
 
 export default function Users(){
     const cookie=new Cookie();
@@ -16,6 +17,7 @@ export default function Users(){
     return (
         <div>
             <h2>Users page</h2>
+            <Logout/>
         </div>
     )
 }
