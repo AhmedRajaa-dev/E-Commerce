@@ -1,9 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { REGISTER,bascURL } from "../../Api/Api";
+import Cookie from "cookie-universal";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Register(){
+    const cookie=new Cookie();
+    const navigate=useNavigate();
+
       //states
   const [form,setForm]=useState({
     name:"",email:"",password:""
@@ -16,8 +21,11 @@ export default function Register(){
   async function handleSubmit(e){
     e.preventDefault()
     try{
-    await axios.post(`${bascURL}/${REGISTER}`,form);
+   const res= await axios.post(`${bascURL}/${REGISTER}`,form);
+    const token=res.data.token;
+    cookie.set("token",token);
     console.log("register succes");
+    navigate("/users");
 
     }catch (error){
         console.log(error);

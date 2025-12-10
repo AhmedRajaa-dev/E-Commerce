@@ -1,9 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 import { LOGIN,bascURL } from "../../Api/Api";
+import Cookie from "cookie-universal";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Login(){
+    const cookie=Cookie();
+    const navigate=useNavigate()
       //states
   const [form,setForm]=useState({
     email:"",password:""
@@ -16,8 +20,11 @@ export default function Login(){
   async function handleSubmit(e){
     e.preventDefault()
     try{
-    await axios.post(`${bascURL}/${LOGIN}`,form);
+    const res=await axios.post(`${bascURL}/${LOGIN}`,form);
+    const token=res.data.token;
+    cookie.set("token",token)
     console.log("login succes");
+    navigate("/users");
 
     }catch (error){
         console.log(error);
