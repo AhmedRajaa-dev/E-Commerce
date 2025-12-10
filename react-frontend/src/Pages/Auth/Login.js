@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
-import { REGISTER,bascURL } from "../../Api/Api";
+import { LOGIN,bascURL } from "../../Api/Api";
 
 
-export default function Register(){
+export default function Login(){
       //states
   const [form,setForm]=useState({
-    name:"",email:"",password:""
+    email:"",password:""
   });
   //handle form change
   const handleChange=(e)=>{
@@ -16,8 +16,8 @@ export default function Register(){
   async function handleSubmit(e){
     e.preventDefault()
     try{
-    await axios.post(`${bascURL}/${REGISTER}`,form);
-    console.log("register succes");
+    await axios.post(`${bascURL}/${LOGIN}`,form);
+    console.log("login succes");
 
     }catch (error){
         console.log(error);
@@ -26,12 +26,8 @@ export default function Register(){
   console.log(form);
     return (
         <div className="">
-            <h1>Register page</h1>
+            <h1>Login page</h1>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Name:</label>
-                    <input id="name" placeholder="Enter your Name..." value={form.name} name="name" onChange={handleChange}/>
-                </div>
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input id="name" placeholder="Enter your Email..." value={form.email} name="email" onChange={handleChange}/>
