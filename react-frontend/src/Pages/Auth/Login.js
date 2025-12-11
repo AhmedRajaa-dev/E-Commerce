@@ -44,6 +44,8 @@ export default function Login(){
                     <input id="password" placeholder="Enter your Password..." value={form.password} name="password" onChange={handleChange}/>
                 </div>
                 <button type="submit">Register</button>
+                <button type="submit"><a href={"http://127.0.0.1:8000/login-google"}>login with google</a></button>
+
             </form>
         </div>
     )
