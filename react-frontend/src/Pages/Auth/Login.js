@@ -33,7 +33,7 @@ export default function Login(){
   console.log(form);
     return (
         <div className="">
-            <h1>Login page</h1>
+            <p className="text-3xl font-bold text-blue-600">Login page</p>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">Email:</label>
