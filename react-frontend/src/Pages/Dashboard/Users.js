@@ -3,6 +3,9 @@ import Cookie from "cookie-universal";
 import { USERS } from "../../Api/Api";
 import Logout from "../Auth/LogOut";
 import { Axios } from "../../Api/Axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function Users(){
     const [users,setUsers]=useState([]);
@@ -24,8 +27,11 @@ export default function Users(){
                             <td class="px-6 py-4">
                                {user.email}
                             </td>
-                            <td class="px-6 py-4">
-                                $2999
+                            <td class="px-6 py-4 flex items-center gap-2">
+                                <Link to={`${user.id}`}>
+                                <FontAwesomeIcon icon={faPenToSquare}/>
+                                </Link>
+                                <FontAwesomeIcon icon={faTrashCan} color="red"/>
                             </td>
                             
                         </tr>
