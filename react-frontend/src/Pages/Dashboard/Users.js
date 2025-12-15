@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Cookie from "cookie-universal";
-import { USERS } from "../../Api/Api";
+import { USER, USERS } from "../../Api/Api";
 import Logout from "../Auth/LogOut";
 import { Axios } from "../../Api/Axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,13 +9,23 @@ import { Link } from "react-router-dom";
 
 export default function Users(){
     const [users,setUsers]=useState([]);
+    const [deleteUser,setDeleteUser]=useState(false);
     const cookie=new Cookie();
     const token=cookie.get("token");
     useEffect(()=>{
         const res=Axios.get(`/${USERS}`)
         .then((res)=>setUsers(res.data));
-    },[]);
+    },[deleteUser]);
     console.log(users)
+    async function handleDeleteUser(id){
+        try{
+            const res= await Axios.delete(`${USER}/${id}`)
+            setDeleteUser((prev)=>!prev)
+        }catch (error){
+            console.log(error);
+        }
+
+    };
     const usersShow=users.map((user,key)=>(
         <tr class="bg-neutral-primary border-b border-default" key={key}>
                             <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
@@ -29,9 +39,9 @@ export default function Users(){
                             </td>
                             <td class="px-6 py-4 flex items-center gap-2">
                                 <Link to={`${user.id}`}>
-                                <FontAwesomeIcon icon={faPenToSquare}/>
+                                <FontAwesomeIcon  icon={faPenToSquare}/>
                                 </Link>
-                                <FontAwesomeIcon icon={faTrashCan} color="red"/>
+                                <FontAwesomeIcon className="cursor-pointer" icon={faTrashCan}  color="red" onClick={()=>handleDeleteUser(user.id)}/>
                             </td>
                             
                         </tr>
