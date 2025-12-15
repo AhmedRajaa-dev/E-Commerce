@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function Login(){
+  //C:\Users\PC-AHMED\Desktop\React Project\E-Commerce\Api-backEnd
     const cookie=Cookie();
     const navigate=useNavigate()
       //states

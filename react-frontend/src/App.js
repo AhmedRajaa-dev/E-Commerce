@@ -7,9 +7,7 @@ import Users from './Pages/Dashboard/Users';
 import Logout from './Pages/Auth/LogOut';
 import GoogleCallBack from './Pages/Auth/GoogleCallBack';
 import Dashboard from './Pages/Dashboard/Dashboard';
-
-
-
+import RequireAuth from './Pages/Auth/RequireAuth';
 
 function App() {
 
@@ -21,8 +19,11 @@ function App() {
         <Route path='/users' element={<Users/>}></Route>
         <Route path='/logout' element={<Logout/>}></Route>
         <Route path='/auth/google/callback' element={<GoogleCallBack/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}>
-          <Route path='users' element={<Users/>}/>
+        {/*Protected Routes*/ }
+        <Route element ={<RequireAuth/>}>
+          <Route path='/dashboard' element={<Dashboard/>}>
+            <Route path='users' element={<Users/>}/>
+          </Route>
         </Route>
       </Routes>
     </div>

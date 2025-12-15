@@ -1,0 +1,27 @@
+import { data, Navigate, Outlet, useNavigate } from "react-router-dom";
+import Cookie from "cookie-universal"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { bascURL, USER } from "../../Api/Api";
+
+export default function RequireAuth(){
+    const navigate=useNavigate();
+    const cookie=new Cookie();
+    const token=cookie.get("token");
+    const [user,setUser]=useState("");
+    useEffect(()=>{
+        axios.get(`${bascURL}/${USER}`,{headers:{
+            Authorization:`Bearer ${token}`
+        }}).then((res)=>{setUser(res.data)}).catch(()=>navigate("/login"))
+    },[]);
+    
+    if(!token){
+        <Navigate to={"/login"}replace={true}/>
+    }
+    if(user===""){
+        return <div>Loading...</div>
+        }
+    return <Outlet/>
+    
+    
+} 
