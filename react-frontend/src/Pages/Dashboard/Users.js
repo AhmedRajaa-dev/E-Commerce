@@ -1,23 +1,65 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Cookie from "cookie-universal";
-import axios from "axios";
-import { bascURL, USERS } from "../../Api/Api";
+import { USERS } from "../../Api/Api";
 import Logout from "../Auth/LogOut";
+import { Axios } from "../../Api/Axios";
 
 export default function Users(){
+    const [users,setUsers]=useState([]);
     const cookie=new Cookie();
     const token=cookie.get("token");
     useEffect(()=>{
-        const res=axios.get(`${bascURL}/${USERS}`,{headers:{
-            Authorization:`Bearer ${token}`
-        }}).then((data)=>console.log(data));
-    
+        const res=Axios.get(`/${USERS}`)
+        .then((res)=>setUsers(res.data));
     },[]);
+    console.log(users)
+    const usersShow=users.map((user,key)=>(
+        <tr class="bg-neutral-primary border-b border-default" key={key}>
+                            <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                                {key+1}
+                            </th>
+                            <td class="px-6 py-4">
+                                {user.name}
+                            </td>
+                            <td class="px-6 py-4">
+                               {user.email}
+                            </td>
+                            <td class="px-6 py-4">
+                                $2999
+                            </td>
+                            
+                        </tr>
+    ));
 
     return (
-        <div>
-            <h2>Users page</h2>
-            <Logout/>
+        <div className="w-screen p-2">
+            <h1>Users Page</h1>
+            <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+                <table class="w-full text-sm text-left rtl:text-right text-body">
+                    <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 font-medium">
+                               ID
+                            </th>
+                            
+                            <th scope="col" class="px-6 py-3 font-medium">
+                                Name
+                            </th>
+                            <th scope="col" class="px-6 py-3 font-medium">
+                                Email
+                            </th>
+                            <th scope="col" class="px-6 py-3 font-medium">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {usersShow} 
+                    </tbody>
+                </table>
+            </div>
+
+            
         </div>
     )
 }

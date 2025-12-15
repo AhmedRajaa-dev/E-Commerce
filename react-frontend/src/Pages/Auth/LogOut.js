@@ -1,6 +1,6 @@
-import axios from "axios";
-import { bascURL, LOGOUT } from "../../Api/Api";
+import {  LOGOUT } from "../../Api/Api";
 import Cookie from "cookie-universal";
+import { Axios } from "../../Api/Axios";
 
 export default function Logout(){
     const cookie=new Cookie();
@@ -8,9 +8,7 @@ export default function Logout(){
     async function handleLogout(){
         console.log(token);
         try{
-            const res=await axios.get(`${bascURL}/${LOGOUT}`,{headers:{
-                Authorization:`Bearer ${token}`
-            }});
+            const res=await Axios.get(`/${LOGOUT}`);
             console.log(res)
         }catch (error){
             console.log(error);

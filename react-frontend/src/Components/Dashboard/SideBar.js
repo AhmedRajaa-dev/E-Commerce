@@ -9,7 +9,7 @@ export default function SideBar(){
     const isOpen= CMenu.isOpenMenu;
    
     return (
-        <div className={`fixed top-[70px] left-0 bg-white h-screen shadow-md z-10 ${isOpen?"w-[220px]":"w-fit"} `}>
+        <div className={`sticky top-[70px] left-0 bg-white h-screen shadow-md z-10 ${isOpen?"w-[220px]":"w-fit"} `}>
             <NavLink to={"users"} className={({isActive})=>
             `flex items-center gap-2 mt-2  my-0 mx-2 text-lg text-[#495057] hover:text-black :bg-[#f2f3fe] rounded-lg ${isActive ?"bg-[#f2f3fe] text-black": "text-[#495057] hover:text-black"}
             `}
