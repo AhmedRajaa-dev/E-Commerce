@@ -7,17 +7,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import Laouding from "../../Css/Laouding";
-
+//states
 export default function Users(){
     const [users,setUsers]=useState([]);
     const [currentUser,setCurrentUser]=useState([]);
     const [deleteUser,setDeleteUser]=useState(false);
+    const [noUsers,setNoUsers]=useState(true);
     const cookie=new Cookie();
     const token=cookie.get("token");
+    //get all users
     useEffect(()=>{
         const res=Axios.get(`/${USERS}`)
-        .then((res)=>setUsers(res.data));
+        .then((res)=>setUsers(res.data))
+        .then(()=>setNoUsers(true))
     },[deleteUser]);
+    //get current user
     useEffect(()=>{
         Axios.get(`${USER}`).then((res)=>setCurrentUser(res.data))
     },[])
@@ -31,7 +35,9 @@ export default function Users(){
         }
 
     };
+    //filter current user
     const userFilter=users.filter((user)=>user.id !==currentUser.id)
+    //mapping current users
     const usersShow=userFilter.map((user,key)=>(
         <tr class="bg-neutral-primary border-b border-default" key={key}>
                             <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
@@ -76,7 +82,9 @@ export default function Users(){
                         </tr>
                     </thead>
                     <tbody>
-                        {users.length===0?<tr><td colSpan={12}><div className=""><Laouding/></div></td></tr>:usersShow} 
+                        {users.length===0?<tr><td colSpan={12}><div className="flex items-center justify-center"><Laouding/></div></td></tr>
+                        :users.length <=1&&noUsers?<tr><td colSpan={12}><div className="flex items-center justify-center"><h1>No Users Found</h1></div></td></tr>:usersShow  
+                    } 
                     </tbody>
                 </table>
             </div>
