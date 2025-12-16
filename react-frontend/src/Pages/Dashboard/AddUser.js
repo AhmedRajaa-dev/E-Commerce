@@ -39,7 +39,7 @@ export default function AddUser(){
                 
                 <div className="max-w-sm mx-auto">
                         <label for="role" class="block mb-2.5 text-sm font-medium text-heading">Select an option</label>
-                        <select id="role" class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"  onChange={(e) => setRole(e.target.value)}>
+                        <select id="role" class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"  onChange={(e) => setRole(e.target.value)} >
                                 <option disabled selected>select role</option>
                                 <option value="1991">Admin</option>
                                 <option value="2001">User</option>

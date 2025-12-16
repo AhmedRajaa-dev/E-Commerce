@@ -10,6 +10,7 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import RequireAuth from './Pages/Auth/RequireAuth';
 import User from './Pages/Dashboard/User';
 import AddUser from './Pages/Dashboard/AddUser';
+import "flowbite";
 
 function App() {
 

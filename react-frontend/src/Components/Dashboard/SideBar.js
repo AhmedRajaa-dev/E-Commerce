@@ -7,6 +7,7 @@ import { Menu } from "../../Context/MenuContext";
 export default function SideBar(){
     const CMenu=useContext(Menu);
     const isOpen= CMenu.isOpenMenu;
+    
    
     return (
         <div className={`sticky top-[70px] left-0 bg-white h-screen shadow-md z-10 ${isOpen?"w-[220px]":"w-fit"} `}>

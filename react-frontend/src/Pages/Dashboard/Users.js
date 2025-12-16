@@ -63,6 +63,7 @@ export default function Users(){
     ));
 
     return (
+        
         <div className="w-screen p-2">
             <div className="flex items-center justify-between">
                 <h1>Users Page</h1>
@@ -100,6 +101,7 @@ export default function Users(){
                     </tbody>
                 </table>
             </div>
+            
 
             
         </div>
