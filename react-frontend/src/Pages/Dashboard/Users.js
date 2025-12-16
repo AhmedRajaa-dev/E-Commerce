@@ -49,6 +49,9 @@ export default function Users(){
                             <td class="px-6 py-4">
                                {user.email}
                             </td>
+                            <td class="px-6 py-4">
+                               {user.role==="1995"?"Admin":user.role==="2001"?"User":"Writer"}
+                            </td>
                             <td class="px-6 py-4 flex items-center gap-2">
                                 <Link to={`${user.id}`}>
                                 <FontAwesomeIcon  icon={faPenToSquare}/>
@@ -61,7 +64,13 @@ export default function Users(){
 
     return (
         <div className="w-screen p-2">
-            <h1>Users Page</h1>
+            <div className="flex items-center justify-between">
+                <h1>Users Page</h1>
+                <Link to="dashboard/user/add">
+                <button type="button" class="text-blue-800 bg-white box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Add Users</button>
+                </Link>
+            </div>
+            
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
                 <table class="w-full text-sm text-left rtl:text-right text-body">
                     <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
@@ -75,6 +84,9 @@ export default function Users(){
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
                                 Email
+                            </th>
+                            <th scope="col" class="px-6 py-3 font-medium">
+                                Role
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
                                 Action
