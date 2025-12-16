@@ -6,9 +6,11 @@ import { Axios } from "../../Api/Axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
+import Laouding from "../../Css/Laouding";
 
 export default function Users(){
     const [users,setUsers]=useState([]);
+    const [currentUser,setCurrentUser]=useState([]);
     const [deleteUser,setDeleteUser]=useState(false);
     const cookie=new Cookie();
     const token=cookie.get("token");
@@ -16,6 +18,9 @@ export default function Users(){
         const res=Axios.get(`/${USERS}`)
         .then((res)=>setUsers(res.data));
     },[deleteUser]);
+    useEffect(()=>{
+        Axios.get(`${USER}`).then((res)=>setCurrentUser(res.data))
+    },[])
     console.log(users)
     async function handleDeleteUser(id){
         try{
@@ -26,7 +31,8 @@ export default function Users(){
         }
 
     };
-    const usersShow=users.map((user,key)=>(
+    const userFilter=users.filter((user)=>user.id !==currentUser.id)
+    const usersShow=userFilter.map((user,key)=>(
         <tr class="bg-neutral-primary border-b border-default" key={key}>
                             <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                                 {key+1}
@@ -70,7 +76,7 @@ export default function Users(){
                         </tr>
                     </thead>
                     <tbody>
-                        {usersShow} 
+                        {users.length===0?<tr><td colSpan={12}><div className=""><Laouding/></div></td></tr>:usersShow} 
                     </tbody>
                 </table>
             </div>

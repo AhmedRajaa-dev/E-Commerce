@@ -3,6 +3,7 @@ import Cookie from "cookie-universal"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { bascURL, USER } from "../../Api/Api";
+import Laouding from "../../Css/Laouding";
 
 export default function RequireAuth(){
     const navigate=useNavigate();
@@ -19,7 +20,8 @@ export default function RequireAuth(){
         <Navigate to={"/login"}replace={true}/>
     }
     if(user===""){
-        return <div>Loading...</div>
+        return  <div className="flex min-h-screen items-center justify-center"><Laouding/></div>
+        
         }
     return <Outlet/>
     

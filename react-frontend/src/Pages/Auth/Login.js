@@ -3,6 +3,7 @@ import { useState } from "react";
 import { LOGIN,bascURL } from "../../Api/Api";
 import Cookie from "cookie-universal";
 import { useNavigate } from "react-router-dom";
+import Laouding from "../../Css/Laouding";
 
 
 export default function Login(){
@@ -13,26 +14,32 @@ export default function Login(){
   const [form,setForm]=useState({
     email:"",password:""
   });
+  const [laouding,setLaouding]=useState(false)
   //handle form change
   const handleChange=(e)=>{
     setForm({...form,[e.target.name]:e.target.value})
   };
   //handleSubmit
   async function handleSubmit(e){
+    setLaouding(true)
     e.preventDefault()
     try{
     const res=await axios.post(`${bascURL}/${LOGIN}`,form);
     const token=res.data.token;
     cookie.set("token",token)
     console.log("login succes");
+    setLaouding(false);
     navigate("/dashboard");
 
     }catch (error){
         console.log(error);
+        setLaouding(true);
     }
   }
   console.log(form);
     return (
+      <>
+        {laouding&&<Laouding/>}
         <div className="">
             <p className="text-3xl font-bold text-blue-600">Login page</p>
             <form onSubmit={handleSubmit}>
@@ -49,5 +56,6 @@ export default function Login(){
 
             </form>
         </div>
+        </>
     )
 }
