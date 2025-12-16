@@ -25,7 +25,7 @@ export default function Register(){
     const token=res.data.token;
     cookie.set("token",token);
     console.log("register succes");
-    navigate("/users");
+    navigate("/dashboard");
 
     }catch (error){
         console.log(error);
