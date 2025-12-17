@@ -27,24 +27,26 @@ export default function Users(){
     },[])
     console.log(users)
     async function handleDeleteUser(id){
+        if(currentUser.id!==id){
         try{
             const res= await Axios.delete(`${USER}/${id}`)
             setDeleteUser((prev)=>!prev)
         }catch (error){
             console.log(error);
         }
+        }
 
     };
     //filter current user
-    const userFilter=users.filter((user)=>user.id !==currentUser.id)
+   // const userFilter=users.filter((user)=>user.id !==currentUser.id)
     //mapping current users
-    const usersShow=userFilter.map((user,key)=>(
+    const usersShow=users.map((user,key)=>(
         <tr class="bg-neutral-primary border-b border-default" key={key}>
                             <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                                 {key+1}
                             </th>
                             <td class="px-6 py-4">
-                                {user.name}
+                                {user.name===currentUser.name?user.name+ "(You)":user.name}
                             </td>
                             <td class="px-6 py-4">
                                {user.email}
@@ -56,8 +58,11 @@ export default function Users(){
                                 <Link to={`${user.id}`}>
                                 <FontAwesomeIcon  icon={faPenToSquare}/>
                                 </Link>
+                                 {currentUser.name!==user.name&&(
                                 <FontAwesomeIcon className="cursor-pointer" icon={faTrashCan}  color="red" onClick={()=>handleDeleteUser(user.id)}/>
+                                      )}  
                             </td>
+                            
                             
                         </tr>
     ));
@@ -96,7 +101,7 @@ export default function Users(){
                     </thead>
                     <tbody>
                         {users.length===0?<tr><td colSpan={12}><div className="flex items-center justify-center"><Laouding/></div></td></tr>
-                        :users.length <=1&&noUsers?<tr><td colSpan={12}><div className="flex items-center justify-center"><h1>No Users Found</h1></div></td></tr>:usersShow  
+                        :users.length <=0&&noUsers?<tr><td colSpan={12}><div className="flex items-center justify-center"><h1>No Users Found</h1></div></td></tr>:usersShow  
                     } 
                     </tbody>
                 </table>
