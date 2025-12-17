@@ -29,7 +29,7 @@ export default function Login(){
     cookie.set("token",token)
     console.log("login succes");
     setLaouding(false);
-    navigate("/dashboard");
+    window.location.pathname="/dashboard";
 
     }catch (error){
         console.log(error);

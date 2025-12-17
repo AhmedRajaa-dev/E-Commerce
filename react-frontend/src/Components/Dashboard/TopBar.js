@@ -4,15 +4,16 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { Menu } from "../../Context/MenuContext";
 import { Axios } from "../../Api/Axios";
 import { LOGOUT, USER } from "../../Api/Api";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import Cookie from "cookie-universal" 
 
 export default function TopBar(){
     const [name,setName]=useState("");
     const [dropdownOpen, setDropdownOpen] = useState(false); 
     const CMenu=useContext(Menu);
     const navigate=useNavigate();
+    const cookie=new Cookie()
     const isSetOpen=CMenu.isSetOpenMenu;
-
     const dropdownRef = useRef(null);
 
     console.log(isSetOpen);
@@ -38,6 +39,7 @@ export default function TopBar(){
             try{
                 const res=await Axios.get(`/${LOGOUT}`);
                 console.log(res)
+                cookie.remove("token");
                 window.location.pathname="/login";
             }catch (error){
                 console.log(error);
