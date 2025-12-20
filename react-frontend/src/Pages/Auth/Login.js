@@ -26,10 +26,12 @@ export default function Login(){
     try{
     const res=await axios.post(`${bascURL}/${LOGIN}`,form);
     const token=res.data.token;
+    const role=res.data.user.role;
+    const go=role==="1995"?"dashboard":"dashboard/writer";
     cookie.set("token",token)
     console.log("login succes");
     setLaouding(false);
-    window.location.pathname="/dashboard";
+    window.location.pathname=`/${go}`;
 
     }catch (error){
         console.log(error);

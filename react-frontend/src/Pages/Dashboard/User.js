@@ -9,13 +9,16 @@ export default function User(){
     const [email,setEmail]=useState("");
     const [role,setRole]=useState("");
     const [disable,setDisable]=useState(false);
+    const [Laouding,setLaouding]=useState(false)
     const { id } = useParams();
     useEffect(()=>{
         Axios.get(`${USER}/${id}`).then((res)=>{
+            setLaouding(true);
             setName(res.data.name)
             setEmail(res.data.email)
             setRole(res.data.role)
-        }).then(()=>setDisable(false))
+            setLaouding(true);
+        }).then(()=>setDisable(false)).catch(()=>navigate("dashboard/users/error/404"))
         
     },[]);
      async function handleSubmit(e){

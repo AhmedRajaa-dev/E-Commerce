@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { bascURL, USER } from "../../Api/Api";
 import Laouding from "../../Css/Laouding";
+import Error403 from "./Error403";
 
-export default function RequireAuth(){
+export default function RequireAuth({allowedRole}){
     const navigate=useNavigate();
     const cookie=new Cookie();
     const token=cookie.get("token");
@@ -22,8 +23,15 @@ export default function RequireAuth(){
     if(user===""){
         return  <div className="flex min-h-screen items-center justify-center"><Laouding/></div>
         
-        }
-    return <Outlet/>
+    }
+    if(allowedRole.includes(user.role)){
+        return<Outlet/>
+    }else{
+       return <Error403/>
+    }
+
+       
+        
     
     
 } 
