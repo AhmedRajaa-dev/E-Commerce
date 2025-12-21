@@ -37,7 +37,7 @@ export default function Users(){
         Axios.get(`${USER}`).then((res)=>setCurrentUser(res.data))
     },[])
     console.log(users)
-     async function handleDeleteUser(id){
+     async function handleDelete(id){
        
         try{
             const res= await Axios.delete(`${USER}/${id}`)
@@ -58,14 +58,14 @@ export default function Users(){
         <div className="w-screen p-2">
             <div className="flex items-center justify-between">
                 <h1>Users Page</h1>
-                <Link to="dashboard/user/add">
+                <Link to="/dashboard/user/add">
                 <button type="button" class="text-blue-800 bg-white box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Add Users</button>
                 </Link>
             </div>
             
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
                /*table*/
-               <TableShow header={header} data={users} handleDeleteUser={handleDeleteUser} currentUser={currentUser} />
+               <TableShow header={header} data={users} handleDelete={handleDelete} currentUser={currentUser} />
             </div>
             
 

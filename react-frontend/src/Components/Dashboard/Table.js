@@ -21,7 +21,7 @@ export default function TableShow(props){
                 <FontAwesomeIcon  icon={faPenToSquare}/>
                 </Link>
                 {currentUser.name!==el.name&&
-                <FontAwesomeIcon className="cursor-pointer" icon={faTrashCan}  color="red" onClick={()=>props.handleDeleteUser(el.id)}
+                <FontAwesomeIcon className="cursor-pointer" icon={faTrashCan}  color="red" onClick={()=>props.handleDelete(el.id) }
                 />}
                 
                                       
