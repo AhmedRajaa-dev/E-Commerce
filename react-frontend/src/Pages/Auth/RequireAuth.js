@@ -11,16 +11,38 @@ export default function RequireAuth({allowedRole}){
     const cookie=new Cookie();
     const token=cookie.get("token");
     const [user,setUser]=useState("");
-    useEffect(()=>{
-        axios.get(`${bascURL}/${USER}`,{headers:{
+    const [isLoading,setIsLoading]= useState(false);
+    const [error,setError]= useState(null);
+
+    // useEffect(()=>{
+    //     axios.get(`${bascURL}/${USER}`,{headers:{
+    //         Authorization:`Bearer ${token}`
+    //     }}).then((res)=>{setUser(res.data)}).catch(()=>navigate("/login"))
+    // },[]);
+
+    const fetchUserProfile = async ()=>{
+        setIsLoading(true)
+        try {
+            
+        const response = await axios.get(`${bascURL}/${USER}`,{headers:{
             Authorization:`Bearer ${token}`
-        }}).then((res)=>{setUser(res.data)}).catch(()=>navigate("/login"))
-    },[]);
+        }})    
+        setUser(response.data)
+        } catch (error) {
+            navigate('/login')
+        }finally{
+            setIsLoading(false)
+        }
     
-    if(!token){
+    }
+    useEffect(()=>{
+        fetchUserProfile()
+    },[token])
+    
+    if(!token || !!error){
         <Navigate to={"/login"}replace={true}/>
     }
-    if(user===""){
+    if(isLoading){
         return  <div className="flex min-h-screen items-center justify-center"><Laouding/></div>
         
     }

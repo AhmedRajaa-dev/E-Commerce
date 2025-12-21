@@ -1,0 +1,57 @@
+import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Link } from "react-router-dom"
+import { Axios } from "../../Api/Axios"
+import { faL } from "@fortawesome/free-solid-svg-icons"
+import Laouding from "../../Css/Laouding"
+
+export default function TableShow(props){
+    const currentUser=props.currentUser || false;
+    //handle delete
+   
+    //header show
+    const headerShow=props.header.map((el)=><th scope="col" class="px-6 py-3 font-medium">{el.name}</th>)
+    //body show
+    const dataShow=props.data.map((el,key)=>
+        <tr key={key}>    
+        <td class="px-6 py-4">{key+1}</td>
+        {props.header.map((item,key2)=>(
+            <td key={key2} class="px-6 py-4">{el[item.key]==="1995"?"Admin":el[item.key]==="2001"?"User":el[item.key]==="1996"?"Writer":el[item.key]==="1999"?"Product Manger":el[item.key]}{currentUser&&el[item.key]===currentUser.name&& " (You)"}</td>
+        ))}
+         <td class="px-6 py-4 flex items-center gap-2">
+                <Link to={`${el.id}`}>
+                <FontAwesomeIcon  icon={faPenToSquare}/>
+                </Link>
+                {currentUser.name!==el.name&&
+                <FontAwesomeIcon className="cursor-pointer" icon={faTrashCan}  color="red" onClick={()=>props.handleDeleteUser(el.id)}
+                />}
+                
+                                      
+                            </td>
+        </tr>
+    
+    )
+    return (
+         <table class="w-full text-sm text-left rtl:text-right text-body">
+                    <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
+                      
+                        
+                            
+                        <tr>
+                            <th scope="col" class="px-6 py-3 font-medium">
+                                id
+                            </th>
+                            {headerShow}
+                            <th scope="col" class="px-6 py-3 font-medium">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.data.length ===0&&<td class="px-6 py-4 text-center" colSpan={12}><Laouding/></td>}
+                       {dataShow}
+                    </tbody>
+                </table>
+    )
+    
+}

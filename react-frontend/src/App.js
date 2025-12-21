@@ -13,6 +13,8 @@ import Error403 from './Pages/Auth/Error403';
 import Writer from './Pages/Dashboard/Writer';
 import Error404 from './Pages/Auth/Error404';
 import RequireBack from './Pages/Auth/RequireBack';
+import Categories from './Pages/Dashboard/Categories';
+import AddCategory from './Pages/Dashboard/AddCategory';
 
 function App() {
 
@@ -28,12 +30,17 @@ function App() {
         <Route path='/auth/google/callback' element={<GoogleCallBack/>}/>
         <Route path='/*' element={<Error404/>}></Route>
         {/*Protected Routes*/ }
-          <Route element={<RequireAuth allowedRole={["1996","1995"]}/>}>      
-              <Route path='/dashboard' element={<Dashboard/>}> 
-                <Route element ={<RequireAuth allowedRole={"1995"}/>}>
-                <Route path='users' element={<Users/>}/>
+          <Route element={<RequireAuth allowedRole={["1996","1995","1999"]}/>}>      
+              <Route path='/dashboard'   element={<Dashboard/>}> 
+                {/* <Route index element={<Users/>}/> */}
+
+                <Route path='users' index element={<Users/>}/>
                 <Route path='users/:id'element={<User/>}/>
                 <Route path='user/add'element={<AddUser/>}/>
+              
+              <Route element ={<RequireAuth allowedRole={["1996","1999","1995"]}/>}>
+              <Route path='categories' element={<Categories/>}/>
+              <Route path='category/add' element={<AddCategory/>}/>
               </Route>
               <Route element ={<RequireAuth allowedRole={["1996","1995"]}/>}>
               <Route path='writer' element={<Writer/>}/>

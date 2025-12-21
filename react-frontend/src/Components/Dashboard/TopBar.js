@@ -19,6 +19,7 @@ export default function TopBar(){
     console.log(isSetOpen);
 
     useEffect(()=>{
+        console.log('fromtop bar')
         Axios.get(`/${USER}`)
             .then((res)=>{setName(res.data.name)})
             .catch(()=>navigate("/login"))

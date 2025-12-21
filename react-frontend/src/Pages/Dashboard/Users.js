@@ -5,67 +5,53 @@ import Logout from "../Auth/LogOut";
 import { Axios } from "../../Api/Axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 import Laouding from "../../Css/Laouding";
+import TableShow from "../../Components/Dashboard/Table";
 //states
 export default function Users(){
     const [users,setUsers]=useState([]);
     const [currentUser,setCurrentUser]=useState([]);
     const [deleteUser,setDeleteUser]=useState(false);
-    const [noUsers,setNoUsers]=useState(true);
     const cookie=new Cookie();
     const token=cookie.get("token");
+
+    const getUsers =async ()=>{
+    
+     try {
+         const res=await Axios.get(`/${USERS}`)
+         .then((res)=>setUsers(res.data))
+     } catch (error) {
+        console.log(error)
+     }
+       
+    }
     //get all users
     useEffect(()=>{
-        const res=Axios.get(`/${USERS}`)
-        .then((res)=>setUsers(res.data))
-        .then(()=>setNoUsers(true))
-    },[deleteUser]);
+       
+
+         getUsers()
+    },[]);
     //get current user
     useEffect(()=>{
         Axios.get(`${USER}`).then((res)=>setCurrentUser(res.data))
     },[])
     console.log(users)
-    async function handleDeleteUser(id){
-        if(currentUser.id!==id){
+     async function handleDeleteUser(id){
+       
         try{
             const res= await Axios.delete(`${USER}/${id}`)
-            setDeleteUser((prev)=>!prev)
+            getUsers()
+
         }catch (error){
             console.log(error);
         }
-        }
-
-    };
-    //filter current user
-   // const userFilter=users.filter((user)=>user.id !==currentUser.id)
-    //mapping current users
-    const usersShow=users.map((user,key)=>(
-        <tr class="bg-neutral-primary border-b border-default" key={key}>
-                            <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                                {key+1}
-                            </th>
-                            <td class="px-6 py-4">
-                                {user.name===currentUser.name?user.name+ "(You)":user.name}
-                            </td>
-                            <td class="px-6 py-4">
-                               {user.email}
-                            </td>
-                            <td class="px-6 py-4">
-                               {user.role==="1995"?"Admin":user.role==="2001"?"User":"Writer"}
-                            </td>
-                            <td class="px-6 py-4 flex items-center gap-2">
-                                <Link to={`${user.id}`}>
-                                <FontAwesomeIcon  icon={faPenToSquare}/>
-                                </Link>
-                                 {currentUser.name!==user.name&&(
-                                <FontAwesomeIcon className="cursor-pointer" icon={faTrashCan}  color="red" onClick={()=>handleDeleteUser(user.id)}/>
-                                      )}  
-                            </td>
-                            
-                            
-                        </tr>
-    ));
+        
+    }
+    
+    const header=[{key:"name",name:"UserName"},{key:"email",name:"Email"},{key:"role",name:"Role"}];
+    
+   
 
     return (
         
@@ -78,33 +64,8 @@ export default function Users(){
             </div>
             
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-                <table class="w-full text-sm text-left rtl:text-right text-body">
-                    <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 font-medium">
-                               ID
-                            </th>
-                            
-                            <th scope="col" class="px-6 py-3 font-medium">
-                                Name
-                            </th>
-                            <th scope="col" class="px-6 py-3 font-medium">
-                                Email
-                            </th>
-                            <th scope="col" class="px-6 py-3 font-medium">
-                                Role
-                            </th>
-                            <th scope="col" class="px-6 py-3 font-medium">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.length===0?<tr><td colSpan={12}><div className="flex items-center justify-center"><Laouding/></div></td></tr>
-                        :users.length <=0&&noUsers?<tr><td colSpan={12}><div className="flex items-center justify-center"><h1>No Users Found</h1></div></td></tr>:usersShow  
-                    } 
-                    </tbody>
-                </table>
+               /*table*/
+               <TableShow header={header} data={users} handleDeleteUser={handleDeleteUser} currentUser={currentUser} />
             </div>
             
 
