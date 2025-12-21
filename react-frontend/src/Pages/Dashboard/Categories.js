@@ -3,8 +3,7 @@ import { CATEGORIES } from "../../Api/Api";
 import { Axios } from "../../Api/Axios";
 import { Link } from "react-router-dom";
 import Laouding from "../../Css/Laouding";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import TableShow from "../../Components/Dashboard/Table";
 
 export default function Category(){
@@ -24,7 +23,7 @@ export default function Category(){
         
     },[]);
     
-    const header=[{name:"Title"},{name:"Image"}];
+    const header=[{key:"title",name:"Title"},{key:"image",name:"Image"}];
     async function handleDeleteUser(id){
            
             try{

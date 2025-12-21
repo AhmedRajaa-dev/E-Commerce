@@ -1,12 +1,10 @@
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom"
-import { Axios } from "../../Api/Axios"
-import { faL } from "@fortawesome/free-solid-svg-icons"
 import Laouding from "../../Css/Laouding"
 
 export default function TableShow(props){
-    const currentUser=props.currentUser || false;
+    const currentUser=props.currentUser || {name:""};
     //handle delete
    
     //header show
@@ -16,7 +14,7 @@ export default function TableShow(props){
         <tr key={key}>    
         <td class="px-6 py-4">{key+1}</td>
         {props.header.map((item,key2)=>(
-            <td key={key2} class="px-6 py-4">{el[item.key]==="1995"?"Admin":el[item.key]==="2001"?"User":el[item.key]==="1996"?"Writer":el[item.key]==="1999"?"Product Manger":el[item.key]}{currentUser&&el[item.key]===currentUser.name&& " (You)"}</td>
+            <td key={key2} class="px-6 py-4">{item.key==="image"?<img className="w-14 h-14" src={el[item.key]} />:el[item.key]==="1995"?"Admin":el[item.key]==="2001"?"User":el[item.key]==="1996"?"Writer":el[item.key]==="1999"?"Product Manger":el[item.key]}{currentUser&&el[item.key]===currentUser.name&&" (You)"}</td>
         ))}
          <td class="px-6 py-4 flex items-center gap-2">
                 <Link to={`${el.id}`}>
