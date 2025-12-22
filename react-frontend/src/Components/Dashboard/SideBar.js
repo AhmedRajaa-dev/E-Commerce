@@ -1,4 +1,4 @@
-import { faClipboardList, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faClipboardList, faP, faPlus, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { use, useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -45,6 +45,13 @@ export default function SideBar(){
         <FontAwesomeIcon icon={faClipboardList} className={isOpen ? "px-2.5 py-2.5" : "px-1 py-2.5"} />
         {isOpen && <p className="m-0">Category</p>}
       </NavLink>
+      <NavLink to="products" className={({ isActive }) =>
+        `flex items-center gap-2 mt-2 mx-2 text-lg rounded-lg
+        ${isActive ? "bg-[#f2f3fe] text-black" : "text-[#495057] hover:text-black"}`
+      }>
+        <FontAwesomeIcon icon={faP} className={isOpen ? "px-2.5 py-2.5" : "px-1 py-2.5"} />
+        {isOpen && <p className="m-0">Products</p>}
+      </NavLink>
     </>
   )}
 
@@ -57,6 +64,7 @@ export default function SideBar(){
       <FontAwesomeIcon icon={faPlus} className={isOpen ? "px-2.5 py-2.5" : "px-1 py-2.5"} />
       {isOpen && <p className="m-0">Writer</p>}
     </NavLink>
+    
   )}
 
 </div>

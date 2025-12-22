@@ -16,6 +16,8 @@ import RequireBack from './Pages/Auth/RequireBack';
 import Categories from './Pages/Dashboard/Categories';
 import AddCategory from './Pages/Dashboard/AddCategory';
 import Category from './Pages/Dashboard/Category';
+import Products from './Pages/Dashboard/Products';
+import AddProduct from './Pages/Dashboard/AddProduct';
 
 function App() {
 
@@ -41,9 +43,14 @@ function App() {
                 <Route path='user/add'element={<AddUser/>}/>
               
               <Route element ={<RequireAuth allowedRole={["1996","1999","1995"]}/>}>
+              {/*categories */}
               <Route path='categories' element={<Categories/>}/>
               <Route path='categories/:id' element={<Category/>}/>
               <Route path='categories/add' element={<AddCategory/>}/>
+              {/*products */}
+              <Route path='products' element={<Products/>}/>
+              <Route path='products/:id' element={<Category/>}/>
+              <Route path='products/add' element={<AddProduct/>}/>
               </Route>
               <Route element ={<RequireAuth allowedRole={["1996","1995"]}/>}>
               <Route path='writer' element={<Writer/>}/>

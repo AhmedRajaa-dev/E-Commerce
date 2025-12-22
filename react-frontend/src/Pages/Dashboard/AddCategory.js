@@ -8,7 +8,6 @@ export default function AddCategory(){
     const navigate=useNavigate()
     const [title,setTitle]=useState("");
     const [image,setImage]=useState("");
-    const [password,setPassword]=useState("");
     const form=new FormData();
     form.append("title",title);
     form.append("image",image);

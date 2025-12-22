@@ -18,9 +18,7 @@ export default function Category(){
             console.log(error)
             
         }
-        
-        
-        
+  
     },[]);
     
     const header=[{key:"title",name:"Title"},{key:"image",name:"Image"}];
