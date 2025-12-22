@@ -15,7 +15,7 @@ import Error404 from './Pages/Auth/Error404';
 import RequireBack from './Pages/Auth/RequireBack';
 import Categories from './Pages/Dashboard/Categories';
 import AddCategory from './Pages/Dashboard/AddCategory';
-import Category from './Pages/Dashboard/Categories';
+import Category from './Pages/Dashboard/Category';
 
 function App() {
 
@@ -26,6 +26,7 @@ function App() {
           <Route path='/register' element={<Register/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
         </Route>
+   
         <Route path='/users' element={<Users/>}></Route>
         <Route path='/logout' element={<Logout/>}></Route>
         <Route path='/auth/google/callback' element={<GoogleCallBack/>}/>

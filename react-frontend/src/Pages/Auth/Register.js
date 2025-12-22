@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { REGISTER,bascURL } from "../../Api/Api";
 import Cookie from "cookie-universal";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,10 @@ export default function Register(){
   const [form,setForm]=useState({
     name:"",email:"",password:""
   });
+  const focus =useRef("");
+  useEffect(()=>{
+    focus.current.focus();
+  })
   //handle form change
   const handleChange=(e)=>{
     setForm({...form,[e.target.name]:e.target.value})
@@ -38,7 +42,7 @@ export default function Register(){
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name:</label>
-                    <input id="name" placeholder="Enter your Name..." value={form.name} name="name" onChange={handleChange}/>
+                    <input id="name" placeholder="Enter your Name..." value={form.name} name="name" onChange={handleChange} ref={focus}/>
                 </div>
                 <div>
                     <label htmlFor="email">Email:</label>

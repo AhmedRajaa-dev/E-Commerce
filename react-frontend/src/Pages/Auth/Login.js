@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LOGIN,bascURL } from "../../Api/Api";
 import Cookie from "cookie-universal";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,10 @@ export default function Login(){
   const [form,setForm]=useState({
     email:"",password:""
   });
+  const focus=useRef(null);
+  useEffect(()=>{
+    focus.current.focus();
+  },[])
   const [laouding,setLaouding]=useState(false)
   //handle form change
   const handleChange=(e)=>{
@@ -47,7 +51,7 @@ export default function Login(){
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">Email:</label>
-                    <input id="name" placeholder="Enter your Email..." value={form.email} name="email" onChange={handleChange}/>
+                    <input id="name" placeholder="Enter your Email..." value={form.email} name="email" onChange={handleChange} ref={focus}/>
                 </div>
                 <div>
                     <label htmlFor="password">password:</label>
