@@ -14,7 +14,9 @@ export default function TableShow(props){
         <tr key={key}>    
         <td class="px-6 py-4">{key+1}</td>
         {props.header.map((item,key2)=>(
-            <td key={key2} class="px-6 py-4">{item.key==="image"?<img className="w-14 h-14" src={el[item.key]} />:el[item.key]==="1995"?"Admin":el[item.key]==="2001"?"User":el[item.key]==="1996"?"Writer":el[item.key]==="1999"?"Product Manger":el[item.key]}{currentUser&&el[item.key]===currentUser.name&&" (You)"}</td>
+            <td key={key2} class="px-6 py-4">{item.key==="image"?<img className="w-14 h-14" src={el[item.key]} alt=""/>:item.key=="images"?
+            el[item.key].map((img)=><img width="50px" src={img.image} alt=""/>)
+            :el[item.key]==="1995"?"Admin":el[item.key]==="2001"?"User":el[item.key]==="1996"?"Writer":el[item.key]==="1999"?"Product Manger":el[item.key]}{currentUser&&el[item.key]===currentUser.name&&" (You)"}</td>
         ))}
          <td class="px-6 py-4 flex items-center gap-2">
                 <Link to={`${el.id}`}>

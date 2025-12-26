@@ -18,6 +18,7 @@ import AddCategory from './Pages/Dashboard/AddCategory';
 import Category from './Pages/Dashboard/Category';
 import Products from './Pages/Dashboard/Products';
 import AddProduct from './Pages/Dashboard/AddProduct';
+import UpdateProduct from './Pages/Dashboard/UpdateProduct';
 
 function App() {
 
@@ -49,7 +50,7 @@ function App() {
               <Route path='categories/add' element={<AddCategory/>}/>
               {/*products */}
               <Route path='products' element={<Products/>}/>
-              <Route path='products/:id' element={<Category/>}/>
+              <Route path='updateProduct/:id' element={<UpdateProduct/>}/>
               <Route path='products/add' element={<AddProduct/>}/>
               </Route>
               <Route element ={<RequireAuth allowedRole={["1996","1995"]}/>}>

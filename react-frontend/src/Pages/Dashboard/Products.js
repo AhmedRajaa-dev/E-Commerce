@@ -22,7 +22,7 @@ export default function Products(){
   
     },[]);
     
-    const header=[{key:"title",name:"Title"},{key:"image",name:"Image"},{key:"description",name:"description"},{key:"price",name:"price"},{key:"rating",name:"rating"}];
+    const header=[{key:"images",name:"images"},{key:"title",name:"Title"},{key:"image",name:"Image"},{key:"description",name:"description"},{key:"price",name:"price"},{key:"rating",name:"rating"}];
     async function handleDelete(id){
            
             try{

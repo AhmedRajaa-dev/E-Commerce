@@ -13,22 +13,17 @@ export default function AddProduct(){
     });
     const [images,setImages]=useState([]);
     const [categories,setCategories]=useState([]);
-    const [send,setSend]=useState(false);
     const [uploading,setUploading]=useState(0)
-    const [id,setId]=useState("");
+    const {id}=useParams();
     const temp=useRef(-1);
-    const ids=useRef([])
-    //console.log(id)
-    async function handleSubmitForm(){
-        try {
-            const res=await Axios.post(`${PRODUCT}/add`,dummyData);
-            setId(res.data.id);
-            console.log(res)
-            
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    const ids=useRef([]);
+    //get product 
+    useEffect(()=>{
+        const ress=Axios.get(`/${PRODUCT}/${id}`)
+        .then((res)=>setForm(res.data[0])).catch((error)=>console.log(error))
+
+    },[])
+    
     //handle delete image
     async function handleDeleteImage(index,img) {
         const find_id=ids.current[index];
@@ -45,11 +40,7 @@ export default function AddProduct(){
     //handleChange
     function handleChange(e){
         setForm({...form,[e.target.name]:e.target.value});
-        setSend(1);
-        if(send!==1){
-            handleSubmitForm()
-        }
-        console.log(form)
+       
     }
     async function handleImagesChange(e) {
         const imagesFiles=e.target.files;
@@ -81,7 +72,6 @@ export default function AddProduct(){
         }
         
     }
-    const dummyData={category:null,title:"d",description:"d",price:"0",discount:"0",About:"d"}
      async function handleEdit(e){
         e.preventDefault();
         try{
@@ -146,23 +136,23 @@ export default function AddProduct(){
                 </div>
                 <div className="mb-5">
                     <label htmlFor="title" className="block mb-2.5 text-sm font-medium text-heading">Title:</label>
-                    <input type="text" id="title" name="title" disabled={!send} className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"  required  value={form.title}  onChange={ handleChange} placeholder="Title..."/>
+                    <input type="text" id="title" name="title" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"  required  value={form.title}  onChange={ handleChange} placeholder="Title..."/>
                 </div>
                 <div className="mb-5">
                     <label htmlFor="description" className="block mb-2.5 text-sm font-medium text-heading">Description:</label>
-                    <input type="text" id="description" name="description"disabled={!send} className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"  required  value={form.description}  onChange={handleChange} placeholder="Description..."/>
+                    <input type="text" id="description" name="description" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"  required  value={form.description}  onChange={handleChange} placeholder="Description..."/>
                 </div>
                 <div className="mb-5">
                     <label htmlFor="price" className="block mb-2.5 text-sm font-medium text-heading">Price:</label>
-                    <input type="text" id="price"name="price"disabled={!send} className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"  required  value={form.price}  onChange={handleChange} placeholder="Price..."/>
+                    <input type="text" id="price"name="price" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"  required  value={form.price}  onChange={handleChange} placeholder="Price..."/>
                 </div>
                 <div className="mb-5">
                     <label htmlFor="discount"className="block mb-2.5 text-sm font-medium text-heading">Discount:</label>
-                    <input type="number" id="discount"name="discount" disabled={!send} className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"  required  value={form.discount}  onChange={handleChange } placeholder="Discount..."/>
+                    <input type="number" id="discount"name="discount" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"  required  value={form.discount}  onChange={handleChange } placeholder="Discount..."/>
                 </div>
                 <div className="mb-5">
                     <label htmlFor="About" className="block mb-2.5 text-sm font-medium text-heading">About:</label>
-                    <input type="text" id="About" name="About"disabled={!send} className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"  required  value={form.About}  onChange={handleChange } placeholder="About..."/>
+                    <input type="text" id="About" name="About" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"  required  value={form.About}  onChange={handleChange } placeholder="About..."/>
                 </div>
                 <div className="flex items-center justify-center w-full">
                     <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 bg-neutral-secondary-medium border border-dashed border-default-strong rounded-base cursor-pointer hover:bg-neutral-tertiary-medium">
@@ -171,7 +161,7 @@ export default function AddProduct(){
                             <p className="mb-2 text-sm"><span className="font-semibold">Click to upload</span> or drag and drop</p>
                             <p className="text-xs">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                         </div>
-                        <input id="dropzone-file" type="file"disabled={!send} multiple  onChange={handleImagesChange} />
+                        <input id="dropzone-file" type="file" multiple  onChange={handleImagesChange} />
                     </label>
                 </div> 
                 {imagesShow}

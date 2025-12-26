@@ -16,10 +16,10 @@ export default function TopBar(){
     const isSetOpen=CMenu.isSetOpenMenu;
     const dropdownRef = useRef(null);
 
-    console.log(isSetOpen);
+   // console.log(isSetOpen);
 
     useEffect(()=>{
-        console.log('fromtop bar')
+       // console.log('fromtop bar')
         Axios.get(`/${USER}`)
             .then((res)=>{setName(res.data.name)})
             .catch(()=>navigate("/login"))
