@@ -3,14 +3,12 @@ import { useEffect, useState } from "react";
 import {  PRODUCT, PRODUCTS } from "../../Api/Api";
 import { Axios } from "../../Api/Axios";
 import { Link } from "react-router-dom";
-import Laouding from "../../Css/Laouding";
-
 import TableShow from "../../Components/Dashboard/Table";
 
 export default function Products(){
     
     const [products,setProducts]=useState([]);
-    //get all categories
+    //get all products
     useEffect(()=>{
         try {
         const res=Axios.get(`/${PRODUCTS}`)

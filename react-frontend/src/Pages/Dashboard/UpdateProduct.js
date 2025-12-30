@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import { Axios } from "../../Api/Axios";
 import {  CATEGORIES, CATEGORY, PRODUCT } from "../../Api/Api";
 import { useNavigate, useParams } from "react-router-dom";
-import { faL } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function AddProduct(){
     const navigate=useNavigate();
@@ -11,6 +11,7 @@ export default function AddProduct(){
     const [form,setForm]=useState({
         category:"select Category",title:"",description:"",price:"",discount:"",About:""
     });
+    const [imagesFromServer,setImagesFromServer]=useState([]);
     const [images,setImages]=useState([]);
     const [categories,setCategories]=useState([]);
     const [uploading,setUploading]=useState(0)
@@ -19,8 +20,8 @@ export default function AddProduct(){
     const ids=useRef([]);
     //get product 
     useEffect(()=>{
-        const ress=Axios.get(`/${PRODUCT}/${id}`)
-        .then((res)=>setForm(res.data[0])).catch((error)=>console.log(error))
+        const res=Axios.get(`/${PRODUCT}/${id}`)
+        .then((res)=>{setForm(res.data[0]); setImagesFromServer(res.data[0].images)}).catch((error)=>console.log(error))
 
     },[])
     
@@ -122,13 +123,23 @@ export default function AddProduct(){
                 </div>
                 
             ))
+             const imagesFromServerShow=imagesFromServer.map((img,key)=>(
+                <div key={key} className="border p-2 w-screen">
+                    <div className="flex items-center justify-between gap-2 w-full">
+                        <img alt="" src={img.image} className="w-screen"></img>
+                       
+                         <div><button type="button" class="text-white bg-red-700 box-border border border-transparent hover:bg-danger-strong focus:ring-4 focus:ring-danger-medium shadow-xs font-medium leading-5 rounded-full text-sm px-8 py-2.5 focus:outline-none" onClick={()=>handleDeleteImage(key,img)}>Delete</button></div>
+
+                    </div>
+                </div>
+            ))
 
     return(
         <div>
             <form className="max-w-sm mx-auto" onSubmit={handleEdit}>
                 <div className="max-w-sm mx-auto">
                      <label htmlFor="category" className="block mb-2.5 text-sm font-medium text-heading">Select Category</label>
-                        <select id="category" name="category" className="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"  onChange={handleChange} value={form.Category}>
+                        <select id="category" name="category" className="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"  onChange={handleChange} value={form.category}>
                                 <option disabled >select Category</option>
                                 {categoriesShow}
                                 
@@ -165,6 +176,7 @@ export default function AddProduct(){
                     </label>
                 </div> 
                 {imagesShow}
+                <div className="flex items-start flex-wrap gap-2">{imagesFromServer}</div>
                 <button disabled={form.title.length>1?false:true}  type="submit" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5">Save</button>
              </form>
 
