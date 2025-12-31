@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { CATEGORIES, CATEGORY } from "../../Api/Api";
 import { Axios } from "../../Api/Axios";
 import { Link } from "react-router-dom";
-import Laouding from "../../Css/Laouding";
 
 import TableShow from "../../Components/Dashboard/Table";
+import PaginatedItems from "../../Components/Dashboard/Pagination/Pagination";
 
 export default function Category(){
+const [limit,setLimit]=useState(3);
+const [page,setPage]=useState(1); 
     
     const [categories,setCategories]=useState([]);
     //get all categories
@@ -46,12 +48,13 @@ export default function Category(){
             </div>
             
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-              <TableShow header={header} data={categories} handleDelete={handleDelete}/>
+              <TableShow page={page} limit={limit} header={header} data={categories} handleDelete={handleDelete} setPage={setPage} setLimit={setLimit}/>
             </div>
             
 
             
         </div>
+        
     )
     
 }

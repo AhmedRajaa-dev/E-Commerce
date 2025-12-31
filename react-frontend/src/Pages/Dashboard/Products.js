@@ -8,6 +8,8 @@ import TableShow from "../../Components/Dashboard/Table";
 export default function Products(){
     
     const [products,setProducts]=useState([]);
+    const limit=3;
+    const [page,setPage]=useState(1)
     //get all products
     useEffect(()=>{
         try {
@@ -45,8 +47,9 @@ export default function Products(){
             </div>
             
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-              <TableShow header={header} data={products} handleDelete={handleDelete}/>
+              <TableShow header={header} data={products} handleDelete={handleDelete} limit={limit} page={page} setPage={setPage}/>
             </div>
+            
             
 
             
