@@ -15,12 +15,14 @@ export default function Users(){
     const [deleteUser,setDeleteUser]=useState(false);
     const cookie=new Cookie();
     const token=cookie.get("token");
+    const [limit,setLimit]=useState(8);
+    const[page,setPage]=useState(1)
 
     const getUsers =async ()=>{
     
      try {
-         const res=await Axios.get(`/${USERS}`)
-         .then((res)=>setUsers(res.data))
+         const res=await Axios.get(`/${USERS}?page=${page}&limit=${limit}`)
+         setUsers(res.data.data);
      } catch (error) {
         console.log(error)
      }
@@ -28,10 +30,9 @@ export default function Users(){
     }
     //get all users
     useEffect(()=>{
-       
-
+    
          getUsers()
-    },[]);
+    },[limit,page]);
     //get current user
     useEffect(()=>{
         Axios.get(`${USER}`).then((res)=>setCurrentUser(res.data))
@@ -65,7 +66,7 @@ export default function Users(){
             
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
                /*table*/
-               <TableShow header={header} data={users} handleDelete={handleDelete} currentUser={currentUser} />
+               <TableShow header={header} data={users} handleDelete={handleDelete} currentUser={currentUser} page={page} limit={limit} setPage={setPage} />
             </div>
             
 

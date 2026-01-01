@@ -6,16 +6,13 @@ import PaginatedItems from "./Pagination/Pagination";
 
 export default function TableShow(props){
     const currentUser=props.currentUser || {name:""};
-    const start=Number(props.limit*(props.page -1 ))  ;
-    const end =start+Number(props.limit);
-    const final =props.data.slice(start,end);
-    console.log(final);
+    
     //handle delete
    
     //header show
     const headerShow=props.header.map((el)=><th scope="col" class="px-6 py-3 font-medium">{el.name}</th>)
     //body show
-    const dataShow=final.map((el,key)=>
+    const dataShow=props.data.map((el,key)=>
         <tr key={key}>    
         <td className="px-6 py-4">{el.id}</td>
         {props.header.map((item,key2)=>(

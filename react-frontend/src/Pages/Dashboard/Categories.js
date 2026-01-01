@@ -14,14 +14,14 @@ const [page,setPage]=useState(1);
     //get all categories
     useEffect(()=>{
         try {
-        const res=Axios.get(`/${CATEGORIES}`)
-        .then((res)=>setCategories(res.data))
+        const res=Axios.get(`/${CATEGORIES}?limit=${limit}&page=${page}`)
+        .then((res)=>setCategories(res.data.data))
         } catch (error) {
             console.log(error)
             
         }
   
-    },[]);
+    },[limit,page]);
     
     const header=[{key:"title",name:"Title"},{key:"image",name:"Image"}];
     async function handleDelete(id){
