@@ -14,7 +14,7 @@ export default function Products(){
     useEffect(()=>{
         try {
         const res=Axios.get(`/${PRODUCTS}`)
-        .then((res)=>setProducts(res.data))
+        .then((res)=>setProducts(res.data.data))
         } catch (error) {
             console.log(error)
             
@@ -47,7 +47,7 @@ export default function Products(){
             </div>
             
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-              <TableShow header={header} data={products} handleDelete={handleDelete} limit={limit} page={page} setPage={setPage}/>
+              <TableShow search="title" header={header} data={products} handleDelete={handleDelete} limit={limit} page={page} setPage={setPage}/>
             </div>
             
             

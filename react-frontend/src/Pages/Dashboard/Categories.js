@@ -48,7 +48,7 @@ const [page,setPage]=useState(1);
             </div>
             
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-              <TableShow page={page} limit={limit} header={header} data={categories} handleDelete={handleDelete} setPage={setPage} setLimit={setLimit}/>
+              <TableShow search="title" page={page} limit={limit} header={header} data={categories} handleDelete={handleDelete} setPage={setPage} setLimit={setLimit}/>
             </div>
             
 
