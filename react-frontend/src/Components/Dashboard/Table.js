@@ -3,17 +3,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom"
 import Laouding from "../../Css/Laouding"
 import PaginatedItems from "./Pagination/Pagination";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Axios } from "../../Api/Axios";
+import { CATEGORIES } from "../../Api/Api";
 
 export default function TableShow(props){
     const [search,setSearch]=useState("")
-   const filteredData = props.data.filter(item =>
-    item[props.search]?.toString().includes(search)
-);
-    
-    function handleSearch(e){
-    setSearch(e.target.value)
+
+ async function getSearchHandleData() {
+        
+        try {
+            const res= await Axios.post(`${props.searchLink}/search?title=${search}`)
+        } catch (error) {
+            console.log(error);
+        }
     }
+    useEffect(()=>{
+        const debounce=setTimeout(()=>{ 
+            getSearchHandleData()
+        },800)
+        return ()=>clearTimeout(debounce)
+    },[search])
+    
+    
     const currentUser=props.currentUser || {name:""};
     
     //handle delete
@@ -21,7 +33,7 @@ export default function TableShow(props){
     //header show
     const headerShow=props.header.map((el)=><th scope="col" class="px-6 py-3 font-medium">{el.name}</th>)
     //body show
-    const dataShow=filteredData.map((el,key)=>
+    const dataShow=props.data.map((el,key)=>
         <tr key={key}>    
         <td className="px-6 py-4">{el.id}</td>
         {props.header.map((item,key2)=>(
@@ -70,7 +82,7 @@ export default function TableShow(props){
                             </li>
                         </ul>
                     </div>
-                    <input type="search" id="search-dropdown" id="input-group-1" class="px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm focus:ring-brand focus:border-brand block w-full placeholder:text-body" placeholder="Search for products" required onChange={handleSearch}/>
+                    <input type="search" id="search-dropdown" id="input-group-1" class="px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm focus:ring-brand focus:border-brand block w-full placeholder:text-body" placeholder="Search for products" required onChange={(e)=>setSearch(e.target.value)}/>
                     <button type="button" class="inline-flex items-center  text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-e-base text-sm px-4 py-2.5 focus:outline-none">
                     <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/></svg>
                     Search

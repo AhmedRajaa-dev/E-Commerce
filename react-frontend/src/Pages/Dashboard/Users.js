@@ -66,7 +66,7 @@ export default function Users(){
             
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
               
-               <TableShow search="name" header={header} data={users} handleDelete={handleDelete} currentUser={currentUser} page={page} limit={limit} setPage={setPage} />
+               <TableShow searchLink={USERS} search="name" header={header} data={users} handleDelete={handleDelete} currentUser={currentUser} page={page} limit={limit} setPage={setPage} />
             </div>
             
 

@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 
 import TableShow from "../../Components/Dashboard/Table";
 import PaginatedItems from "../../Components/Dashboard/Pagination/Pagination";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 export default function Category(){
 const [limit,setLimit]=useState(3);
 const [page,setPage]=useState(1); 
+const [search,setSearch]=useState("")
     
     const [categories,setCategories]=useState([]);
     //get all categories
@@ -22,6 +24,9 @@ const [page,setPage]=useState(1);
         }
   
     },[limit,page]);
+    
+    
+   
     
     const header=[{key:"title",name:"Title"},{key:"image",name:"Image"}];
     async function handleDelete(id){
@@ -48,7 +53,8 @@ const [page,setPage]=useState(1);
             </div>
             
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-              <TableShow search="title" page={page} limit={limit} header={header} data={categories} handleDelete={handleDelete} setPage={setPage} setLimit={setLimit}/>
+                
+              <TableShow searchLink={CATEGORY} search="title" page={page} limit={limit} header={header} data={categories} handleDelete={handleDelete} setPage={setPage} setLimit={setLimit}/>
             </div>
             
 

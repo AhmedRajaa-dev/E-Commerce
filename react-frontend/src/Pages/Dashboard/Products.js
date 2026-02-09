@@ -11,9 +11,11 @@ export default function Products(){
     const limit=3;
     const [page,setPage]=useState(1)
     //get all products
-    useEffect(()=>{
+    useEffect(()=>{ 
         try {
-        const res=Axios.get(`/${PRODUCTS}`)
+                   
+            
+        const res=Axios.get(`/${PRODUCTS}?limit=${limit}&page=${page}`)
         .then((res)=>setProducts(res.data.data))
         } catch (error) {
             console.log(error)
@@ -47,7 +49,7 @@ export default function Products(){
             </div>
             
             <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-              <TableShow search="title" header={header} data={products} handleDelete={handleDelete} limit={limit} page={page} setPage={setPage}/>
+              <TableShow searchLink={PRODUCTS} search="title" header={header} data={products} handleDelete={handleDelete} limit={limit} page={page} setPage={setPage}/>
             </div>
             
             
