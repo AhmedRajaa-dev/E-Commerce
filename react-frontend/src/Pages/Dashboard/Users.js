@@ -50,7 +50,7 @@ export default function Users(){
         
     }
     
-    const header=[{key:"name",name:"UserName"},{key:"email",name:"Email"},{key:"role",name:"Role"}];
+    const header=[{key:"name",name:"UserName"},{key:"email",name:"Email"},{key:"role",name:"Role"},{key:"created_at",name:"Created"},{key:"updated_at",name:"Updated"}];
     
    
 

@@ -28,7 +28,7 @@ const [search,setSearch]=useState("")
     
    
     
-    const header=[{key:"title",name:"Title"},{key:"image",name:"Image"}];
+    const header=[{key:"title",name:"Title"},{key:"image",name:"Image"},{key:"created_at",name:"Created"},{key:"updated_at",name:"Updated"}];
     async function handleDelete(id){
            
             try{

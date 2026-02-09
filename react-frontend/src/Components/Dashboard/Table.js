@@ -6,14 +6,25 @@ import PaginatedItems from "./Pagination/Pagination";
 import { useEffect, useState } from "react";
 import { Axios } from "../../Api/Axios";
 import { CATEGORIES } from "../../Api/Api";
+import TransformDate from "../../Helpers/TransformDate";
 
 export default function TableShow(props){
     const [search,setSearch]=useState("")
-
+    const [filtredData,setFiltredData]=useState([])
+    const [date,setDate]=useState("")
+    const filteredDataByDate=date.length!=0 ?props.data.filter((item)=>TransformDate(item.created_at)===date)
+    :props.data
+    console.log(filteredDataByDate);
+   
+    const filterSearchByDate=data.length>0?filtredData.filter((item)=>
+   TransformDate(item.created_at)===date ):filtredData
+     const showWithDate=search.length>0?filterSearchByDate:filteredDataByDate
+    
  async function getSearchHandleData() {
         
         try {
             const res= await Axios.post(`${props.searchLink}/search?title=${search}`)
+            setFiltredData(res.data);
         } catch (error) {
             console.log(error);
         }
@@ -27,6 +38,8 @@ export default function TableShow(props){
     
     
     const currentUser=props.currentUser || {name:""};
+    console.log(TransformDate("2026-01-13T14:52:05.000000"));
+    
     
     //handle delete
    
@@ -39,7 +52,7 @@ export default function TableShow(props){
         {props.header.map((item,key2)=>(
             <td key={key2} class="px-6 py-4">{item.key==="image"?<img className="w-14 h-14" src={el[item.key]} alt=""/>:item.key=="images"?
             el[item.key].map((img)=><img width="50px" src={img.image} alt=""/>)
-            :el[item.key]==="1995"?"Admin":el[item.key]==="2001"?"User":el[item.key]==="1996"?"Writer":el[item.key]==="1999"?"Product Manger":el[item.key]}{currentUser&&el[item.key]===currentUser.name&&" (You)"}</td>
+            :item.key==="created_at"||item.key==="updated_at"?TransformDate(el[item.key]): el[item.key]==="1995"?"Admin":el[item.key]==="2001"?"User":el[item.key]==="1996"?"Writer":el[item.key]==="1999"?"Product Manger":el[item.key]}{currentUser&&el[item.key]===currentUser.name&&" (You)"}</td>
         ))}
          <td class="px-6 py-4 flex items-center gap-2">
                 <Link to={`${el.id}`}>
@@ -83,6 +96,11 @@ export default function TableShow(props){
                         </ul>
                     </div>
                     <input type="search" id="search-dropdown" id="input-group-1" class="px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm focus:ring-brand focus:border-brand block w-full placeholder:text-body" placeholder="Search for products" required onChange={(e)=>setSearch(e.target.value)}/>
+                    <button type="button" class="inline-flex items-center  text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-e-base text-sm px-4 py-2.5 focus:outline-none">
+                    <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/></svg>
+                    Search
+                    </button>
+                     <input type="date" id="search-dropdown" id="input-group-1" class="px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm focus:ring-brand focus:border-brand block w-full placeholder:text-body" placeholder="Search for products" required onChange={(e)=>setDate(e.target.value)}/>
                     <button type="button" class="inline-flex items-center  text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-e-base text-sm px-4 py-2.5 focus:outline-none">
                     <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/></svg>
                     Search
