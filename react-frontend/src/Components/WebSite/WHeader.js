@@ -59,7 +59,7 @@ export default function WHeader() {
             <FontAwesomeIcon icon={faBars} />
           </button>
         </div>
-      </div>
+      </div>ّ
     </nav>
   );
 }

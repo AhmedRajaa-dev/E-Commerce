@@ -1,3 +1,4 @@
+import TopContent from "../../Components/WebSite/TopContent";
 import WHeader from "../../Components/WebSite/WHeader";
 
 export default function HomeWebSite(){
@@ -5,7 +6,9 @@ export default function HomeWebSite(){
         
         <div className="home">
             <WHeader/>
+            <TopContent/>
 
         </div>
+        
     )
 }
