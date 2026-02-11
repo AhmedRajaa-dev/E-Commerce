@@ -19,6 +19,7 @@ import Category from './Pages/Dashboard/Category';
 import Products from './Pages/Dashboard/Products';
 import AddProduct from './Pages/Dashboard/AddProduct';
 import UpdateProduct from './Pages/Dashboard/UpdateProduct';
+import HomeWebSite from './Pages/WebSite/HomeWebSite';
 
 function App() {
 
@@ -59,6 +60,7 @@ function App() {
             </Route>
             </Route> 
         <Route path='403' element={<Error403/>}/>
+        <Route path='home' element={<HomeWebSite/>}/>
       </Routes>
     </div>
   );

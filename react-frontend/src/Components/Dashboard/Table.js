@@ -16,7 +16,7 @@ export default function TableShow(props){
     :props.data
     console.log(filteredDataByDate);
    
-    const filterSearchByDate=data.length>0?filtredData.filter((item)=>
+    const filterSearchByDate=filteredDataByDate.length>0?filtredData.filter((item)=>
    TransformDate(item.created_at)===date ):filtredData
      const showWithDate=search.length>0?filterSearchByDate:filteredDataByDate
     
