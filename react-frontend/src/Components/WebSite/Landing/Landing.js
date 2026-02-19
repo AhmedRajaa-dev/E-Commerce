@@ -1,5 +1,6 @@
-import contentImg from "../../Assits/mike-petrucci-c9FQyqIECds-unsplash.jpg";
-export default function TopContent() {
+import contentImg from "../../../Assits/mike-petrucci-c9FQyqIECds-unsplash.jpg";
+
+export default function Landing() {
   return (
     <div className=" w-full md:h-[500px] flex items-center justify-around bg-black">
       <div className="bg-slate-400 text-center p-2 ">

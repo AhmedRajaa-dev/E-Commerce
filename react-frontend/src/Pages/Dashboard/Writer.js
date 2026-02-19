@@ -1,7 +1,3 @@
-export default function Writer(){
-    return(
-        <div>
-            
-        </div>
-    )
+export default function Writer() {
+  return <div></div>;
 }

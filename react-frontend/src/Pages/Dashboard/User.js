@@ -18,7 +18,7 @@ export default function User(){
             setEmail(res.data.email)
             setRole(res.data.role)
             setLaouding(true);
-        }).then(()=>setDisable(false)).catch(()=>navigate("dashboard/users/error/404"))
+        }).thFen(()=>setDisable(false)).catch(()=>navigate("dashboard/users/error/404"))
         
     },[]);
      async function handleSubmit(e){

@@ -1,7 +1,6 @@
 export default function Error403() {
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen gap-12 py-8 bg-gray-50">
-      
       <svg
         className="h-[50vh] aspect-video text-gray-800"
         xmlns="http://www.w3.org/2000/svg"

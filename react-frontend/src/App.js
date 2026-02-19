@@ -27,8 +27,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route  element={<WebSite />}>
-        <Route path="/"  element={<HomeWebSite />}/>
+        <Route element={<WebSite />}>
+          <Route path="/" element={<HomeWebSite />} />
           <Route path="/categories" element={<WebSiteCategories />} />
         </Route>
         <Route element={<RequireBack />}>

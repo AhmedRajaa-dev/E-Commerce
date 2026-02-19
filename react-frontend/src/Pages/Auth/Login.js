@@ -1,67 +1,80 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { LOGIN,bascURL } from "../../Api/Api";
+import { LOGIN, bascURL } from "../../Api/Api";
 import Cookie from "cookie-universal";
 import { useNavigate } from "react-router-dom";
 import Laouding from "../../Css/Laouding";
 
-
-export default function Login(){
+export default function Login() {
   //C:\Users\PC-AHMED\Desktop\React Project\E-Commerce\Api-backEnd
-    const cookie=Cookie();
-    const navigate=useNavigate()
-      //states
-  const [form,setForm]=useState({
-    email:"",password:""
+  const cookie = Cookie();
+  const navigate = useNavigate();
+  //states
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
   });
-  const focus=useRef(null);
-  useEffect(()=>{
+  const focus = useRef(null);
+  useEffect(() => {
     focus.current.focus();
-  },[])
-  const [laouding,setLaouding]=useState(false)
+  }, []);
+  const [laouding, setLaouding] = useState(false);
   //handle form change
-  const handleChange=(e)=>{
-    setForm({...form,[e.target.name]:e.target.value})
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
   //handleSubmit
-  async function handleSubmit(e){
-    setLaouding(true)
-    e.preventDefault()
-    try{
-    const res=await axios.post(`${bascURL}/${LOGIN}`,form);
-    const token=res.data.token;
-    const role=res.data.user.role;
-    const go=role==="1995"?"dashboard":"dashboard/writer";
-    cookie.set("token",token)
-    console.log("login succes");
-    setLaouding(false);
-    window.location.pathname=`/${go}`;
-
-    }catch (error){
-        console.log(error);
-        setLaouding(true);
+  async function handleSubmit(e) {
+    setLaouding(true);
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${bascURL}/${LOGIN}`, form);
+      const token = res.data.token;
+      const role = res.data.user.role;
+      const go = role === "1995" ? "dashboard" : "dashboard/writer";
+      cookie.set("token", token);
+      console.log("login succes");
+      setLaouding(false);
+      window.location.pathname = `/${go}`;
+    } catch (error) {
+      console.log(error);
+      setLaouding(true);
     }
   }
   console.log(form);
-    return (
-      <>
-        {laouding&&<Laouding/>}
-        <div className="">
-            <p className="text-3xl font-bold text-blue-600">Login page</p>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input id="name" placeholder="Enter your Email..." value={form.email} name="email" onChange={handleChange} ref={focus}/>
-                </div>
-                <div>
-                    <label htmlFor="password">password:</label>
-                    <input id="password" placeholder="Enter your Password..." value={form.password} name="password" onChange={handleChange}/>
-                </div>
-                <button type="submit">Register</button>
-                <button type="submit"><a href={"http://127.0.0.1:8000/login-google"}>login with google</a></button>
-
-            </form>
-        </div>
-        </>
-    )
+  return (
+    <>
+      {laouding && <Laouding />}
+      <div className="">
+        <p className="text-3xl font-bold text-blue-600">Login page</p>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input
+              id="name"
+              placeholder="Enter your Email..."
+              value={form.email}
+              name="email"
+              onChange={handleChange}
+              ref={focus}
+            />
+          </div>
+          <div>
+            <label htmlFor="password">password:</label>
+            <input
+              id="password"
+              placeholder="Enter your Password..."
+              value={form.password}
+              name="password"
+              onChange={handleChange}
+            />
+          </div>
+          <button type="submit">Register</button>
+          <button type="submit">
+            <a href={"http://127.0.0.1:8000/login-google"}>login with google</a>
+          </button>
+        </form>
+      </div>
+    </>
+  );
 }

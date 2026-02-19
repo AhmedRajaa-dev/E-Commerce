@@ -1,11 +1,12 @@
-import TopContent from "../../../Components/WebSite/TopContent";
 import NavBar from "../../../Components/WebSite/NavBar";
+import Product from "../../../Components/WebSite/Product/Product";
+import Landing from "../../../Components/WebSite/Landing/Landing";
 
 export default function HomeWebSite() {
   return (
     <div className="home">
-
-      <TopContent />
+      <Landing />
+      <Product />
     </div>
   );
 }

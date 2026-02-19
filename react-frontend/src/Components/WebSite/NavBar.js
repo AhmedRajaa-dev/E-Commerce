@@ -84,10 +84,9 @@ export default function NavBar() {
       <div className="flex items-center justify-center gap-8 mt-3 ">
         {categoriesShow}
         <Link className="cursor-pointer hover:text-blue-800" to="/categories">
-          <h6 >Show All</h6>
+          <h6>Show All</h6>
         </Link>
       </div>
-      
     </nav>
   );
 }

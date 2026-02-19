@@ -7,59 +7,55 @@ import Laouding from "../../Css/Laouding";
 import Error403 from "./Error403";
 
 export default function RequireAuth({ allowedRole }) {
+  const cookie = new Cookie();
+  const token = cookie.get("token");
 
-    const cookie = new Cookie();
-    const token = cookie.get("token");
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const [user, setUser] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    const fetchUserProfile = async () => {
-        try {
-            const response = await axios.get(
-                `${bascURL}/${USER}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        Accept: "application/json",
-                    }
-                }
-            );
-            setUser(response.data);
-        } catch (error) {
-            setUser(null);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        if (token) {
-            fetchUserProfile();
-        } else {
-            setIsLoading(false);
-        }
-    }, []);
-
-    if (!token) {
-        return <Navigate to="/login" replace />;
+  const fetchUserProfile = async () => {
+    try {
+      const response = await axios.get(`${bascURL}/${USER}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      });
+      setUser(response.data);
+    } catch (error) {
+      setUser(null);
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    if (isLoading) {
-        return (
-            <div className="flex min-h-screen items-center justify-center">
-                <Laouding />
-            </div>
-        );
+  useEffect(() => {
+    if (token) {
+      fetchUserProfile();
+    } else {
+      setIsLoading(false);
     }
+  }, []);
 
-    if (!user) {
-        return <Navigate to="/login" replace />;
-    }
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
 
-    if (allowedRole.includes(user.role)) {
-        return <Outlet />;
-    }
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Laouding />
+      </div>
+    );
+  }
 
-    return <Error403 />;
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (allowedRole.includes(user.role)) {
+    return <Outlet />;
+  }
+
+  return <Error403 />;
 }
