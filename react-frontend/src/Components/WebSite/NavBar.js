@@ -5,10 +5,31 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-export default function WHeader() {
+import { Axios } from "../../Api/Axios";
+import { useEffect, useState } from "react";
+import { CATEGORIES } from "../../Api/Api";
+import { Link } from "react-router-dom";
+export default function NavBar() {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const res = await Axios.get(`${CATEGORIES}`);
+        setCategories(res.data.slice(-5));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCategories();
+  }, []);
+  const categoriesShow = categories.map((cat) => (
+    <h6 className="cursor-pointer hover:text-blue-800">
+      {cat.title.length > 15 ? cat.title.slice(1, 15) + "..." : cat.title}
+    </h6>
+  ));
   return (
-    <nav className="w-full h-24 fixed top-0 border-b border-gray-100 z-50 shadow-sm bg-white content-center">
-      <div className="max-w-7xl h-10 mx-auto px-4 flex items-center justify-between ">
+    <nav className="w-full h-32 fixed top-0 border-b border-gray-100 z-50 shadow-sm bg-white content-center">
+      <div className="max-w-7xl h-10 mx-auto px-4 flex items-center justify-between  mt-6">
         {/* Logo Section */}
         <div className="flex-shrink-0 cursor-pointer">
           <img src={logo} alt="logo" className="w-32 h-auto" />
@@ -59,7 +80,14 @@ export default function WHeader() {
             <FontAwesomeIcon icon={faBars} />
           </button>
         </div>
-      </div>ّ
+      </div>
+      <div className="flex items-center justify-center gap-8 mt-3 ">
+        {categoriesShow}
+        <Link className="cursor-pointer hover:text-blue-800" to="/categories">
+          <h6 >Show All</h6>
+        </Link>
+      </div>
+      
     </nav>
   );
 }

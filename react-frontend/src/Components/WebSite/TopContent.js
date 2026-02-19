@@ -1,7 +1,7 @@
 import contentImg from "../../Assits/mike-petrucci-c9FQyqIECds-unsplash.jpg";
 export default function TopContent() {
   return (
-    <div className=" w-full md:h-[500px] flex items-center justify-around bg-black mt-12  ">
+    <div className=" w-full md:h-[500px] flex items-center justify-around bg-black">
       <div className="bg-slate-400 text-center p-2 ">
         <h1 className="text-white text-3xl md:text-5xl font-bold mb-8">
           تشكيلة الصيف الجديدة
