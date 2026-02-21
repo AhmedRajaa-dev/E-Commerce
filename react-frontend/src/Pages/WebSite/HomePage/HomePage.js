@@ -1,12 +1,11 @@
-import NavBar from "../../../Components/WebSite/NavBar";
-import Product from "../../../Components/WebSite/Product/Product";
 import Landing from "../../../Components/WebSite/Landing/Landing";
+import LatestSaleProduct from "../../../Components/WebSite/Product/LatestSaleProduct";
 
 export default function HomeWebSite() {
   return (
     <div className="home">
       <Landing />
-      <Product />
+      <LatestSaleProduct />
     </div>
   );
 }
