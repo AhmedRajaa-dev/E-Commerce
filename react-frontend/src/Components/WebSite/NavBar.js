@@ -9,8 +9,10 @@ import { Axios } from "../../Api/Axios";
 import { useEffect, useState } from "react";
 import { CATEGORIES } from "../../Api/Api";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 export default function NavBar() {
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -18,6 +20,8 @@ export default function NavBar() {
         setCategories(res.data.slice(-5));
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
     getCategories();
@@ -82,7 +86,27 @@ export default function NavBar() {
         </div>
       </div>
       <div className="flex items-center justify-center gap-8 mt-3 ">
-        {categoriesShow}
+        {loading ? (
+          <>
+          <div>
+            <Skeleton height="30px" width="80px" />
+          </div>
+           <div>
+            <Skeleton height="30px" width="80px" />
+          </div>
+           <div>
+            <Skeleton height="30px" width="80px" />
+          </div>
+           <div>
+            <Skeleton height="30px" width="80px" />
+          </div>
+           <div>
+            <Skeleton height="30px" width="80px" />
+          </div>
+          </>
+        ) : (
+          categoriesShow
+        )}
         <Link className="cursor-pointer hover:text-blue-800" to="/categories">
           <h6>Show All</h6>
         </Link>

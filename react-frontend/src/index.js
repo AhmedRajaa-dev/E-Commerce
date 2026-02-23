@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./Css/index.css";
+import "react-loading-skeleton/dist/skeleton.css"; 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import MenuContext from "./Context/MenuContext";
