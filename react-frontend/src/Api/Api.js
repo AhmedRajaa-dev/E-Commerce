@@ -13,5 +13,7 @@ export const CATEGORY = "category";
 export const PRODUCTS = "products";
 export const PRODUCT= "product";
 export const LATESTSALE = "latest-sale";
+export const LATEST = "latest";
+export const TOPRATED = "top-rated";
 
 export const GOOGLE_CALL_BACK = "auth/google/callback";
