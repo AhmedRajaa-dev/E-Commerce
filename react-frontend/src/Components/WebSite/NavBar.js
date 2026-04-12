@@ -39,7 +39,7 @@ export default function NavBar() {
           <img src={logo} alt="logo" className="w-32 h-auto" />
         </div>
         {/* Search Bar*/}
-        <div className="flex grow max-w-2xl hidden md:block">
+        <div className="hidden md:flex grow max-w-2xl">
           <form className="relative">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
@@ -88,21 +88,21 @@ export default function NavBar() {
       <div className="flex items-center justify-center gap-8 mt-3 ">
         {loading ? (
           <>
-          <div>
-            <Skeleton height="30px" width="80px" />
-          </div>
-           <div>
-            <Skeleton height="30px" width="80px" />
-          </div>
-           <div>
-            <Skeleton height="30px" width="80px" />
-          </div>
-           <div>
-            <Skeleton height="30px" width="80px" />
-          </div>
-           <div>
-            <Skeleton height="30px" width="80px" />
-          </div>
+            <div>
+              <Skeleton height="30px" width="80px" />
+            </div>
+            <div>
+              <Skeleton height="30px" width="80px" />
+            </div>
+            <div>
+              <Skeleton height="30px" width="80px" />
+            </div>
+            <div>
+              <Skeleton height="30px" width="80px" />
+            </div>
+            <div>
+              <Skeleton height="30px" width="80px" />
+            </div>
           </>
         ) : (
           categoriesShow

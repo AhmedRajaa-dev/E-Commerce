@@ -7,7 +7,7 @@ import Laouding from "../../Css/Laouding";
 import Error403 from "./Error403";
 
 export default function RequireAuth({ allowedRole }) {
-  const cookie = new Cookie();
+  const cookie = Cookie();
   const token = cookie.get("token");
 
   const [user, setUser] = useState(null);

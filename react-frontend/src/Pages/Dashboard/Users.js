@@ -13,7 +13,7 @@ export default function Users() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState([]);
   const [deleteUser, setDeleteUser] = useState(false);
-  const cookie = new Cookie();
+  const cookie = Cookie();
   const token = cookie.get("token");
   const [limit, setLimit] = useState(8);
   const [page, setPage] = useState(1);

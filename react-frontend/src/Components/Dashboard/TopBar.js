@@ -12,7 +12,7 @@ export default function TopBar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const CMenu = useContext(Menu);
   const navigate = useNavigate();
-  const cookie = new Cookie();
+  const cookie = Cookie();
   const isSetOpen = CMenu.isSetOpenMenu;
   const dropdownRef = useRef(null);
 

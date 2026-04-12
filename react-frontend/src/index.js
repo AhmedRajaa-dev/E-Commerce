@@ -3,7 +3,10 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./Css/index.css";
 import "react-loading-skeleton/dist/skeleton.css"; 
+import "react-image-gallery/styles/image-gallery.css";
 import App from "./App";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 import reportWebVitals from "./reportWebVitals";
 import MenuContext from "./Context/MenuContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -11,7 +14,9 @@ root.render(
   <React.StrictMode>
     <MenuContext>
       <Router>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </Router>
     </MenuContext>
   </React.StrictMode>,

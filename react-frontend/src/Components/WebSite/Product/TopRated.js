@@ -2,12 +2,14 @@ import { faStar as solid } from "@fortawesome/free-solid-svg-icons";
 import { faStar, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import i from "../../../Assits/logo (2).png";
+import { NavLink } from "react-router-dom";
 export default function TopRated(props) {
   const stars = Math.min(props.rating, 5);
   const showGoldStars = Array.from({ length: stars }).map((el, key) => (
     <FontAwesomeIcon key={key} icon={solid} />
   ));
   return (
+    <NavLink to={`/product${props.id}`}>
     <div className="w-80 h-[400px]  bg-slate-500 rounded-md p-3.5 m-4  ">
       <div className="w-72 h-48 bg-slate-200 mx-auto  rounded-sm ">
         <img src={props.img} alt="" />
@@ -31,5 +33,6 @@ export default function TopRated(props) {
         </div>
       </div>
     </div>
+    </NavLink>
   );
 }

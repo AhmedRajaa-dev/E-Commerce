@@ -3,7 +3,7 @@ import Cookie from "cookie-universal";
 import { Axios } from "../../Api/Axios";
 
 export default function Logout() {
-  const cookie = new Cookie();
+  const cookie = Cookie();
   const token = cookie.get("token");
   async function handleLogout() {
     console.log(token);

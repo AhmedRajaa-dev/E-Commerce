@@ -19,6 +19,7 @@ export default function ShowTopRated() {
       price={product.price}
       discount={product.discount}
       rating={product.rating}
+      id={product.id}
     />
   ));
 

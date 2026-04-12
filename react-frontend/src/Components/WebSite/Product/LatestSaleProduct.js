@@ -22,6 +22,7 @@ export default function LatestSaleProduct() {
       price={product.price}
       discount={product.discount}
       rating={product.rating}
+      id={product.id}
     />
   ));
   console.log(products);

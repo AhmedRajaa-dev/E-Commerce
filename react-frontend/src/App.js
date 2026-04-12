@@ -22,6 +22,7 @@ import UpdateProduct from "./Pages/Dashboard/UpdateProduct";
 import HomeWebSite from "./Pages/WebSite/HomePage/HomePage";
 import WebSite from "./Pages/WebSite/WebSite";
 import WebSiteCategories from "./Pages/WebSite/Categories/Categories";
+import SinglePage from "./Components/WebSite/SinglePage/SinglePage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route element={<WebSite />}>
           <Route path="/" element={<HomeWebSite />} />
           <Route path="/categories" element={<WebSiteCategories />} />
+          <Route path="/product/:id" element={<SinglePage/>}/>
         </Route>
         <Route element={<RequireBack />}>
           <Route path="/register" element={<Register />}></Route>

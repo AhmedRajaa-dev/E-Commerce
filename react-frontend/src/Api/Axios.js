@@ -7,5 +7,6 @@ export const Axios = axios.create({
   baseURL: bascURL,
   headers: {
     Authorization: `Bearer ${token}`,
+    Accept: "application/json",
   },
 });
