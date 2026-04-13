@@ -20,7 +20,9 @@ export default function Register() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+      navigate("/login", {
+        state: { email: form.email, password: form.password },
+      });
     }
   }, [isAuthenticated, navigate]);
 
@@ -141,7 +143,7 @@ export default function Register() {
               className="w-full rounded-lg border border-white/30 bg-white/10 backdrop-blur-sm px-4 py-3 text-white placeholder:text-white/60 focus:border-white focus:ring-2 focus:ring-white/50 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <p className="mt-1 text-xs text-white/70">
-             It must be at least 6 letters long.
+              It must be at least 6 letters long.
             </p>
           </div>
 
